@@ -1,0 +1,26 @@
+
+
+******SETUP 
+
+1.  Descargar la carpeta: PySimTool_2019
+
+2. En la carpeta "PySimTool_2019\3.Tool" se encuentra el archivo excel "PYsim_new.xlsx"  abrir este archivo
+
+3. En el archivo PYsim_new  en la hoja "Hoja de parametros"  el usuario puede modificar los parametros de politica para la simulacion
+
+4. Luego de elegir los parametros el usuario debe cerrar el Excel 
+
+5. Para correr la herramienta el usuario debe abrir el Master dofile "Par_Master.do".   En el master dofile debe reemplazar el global "path" por la locacion donde
+   se encuentra la carpeta PySimTool_2019.  Ejemplo:  "C:\Users\wb547455\WBG\Ramirez - 01 - PySimTool\PySimTool_2019" 
+
+6.  Una vez se reemplaza la el path  debe correrse el master dofile y el Excel abrira automaticamente con los resultados.  No se debe modificar nada mas del master dofile
+    unicamente el global path 
+
+7. Adicionalmente checkear si se requiere instalar el paquete "alorenz"  y quizas algun otro paquete que no tengan instalado por default
+
+8. Al abrir el Excel los indicadores de resultados de simulacion apareceran en las hojas de color verde.   
+
+9. Si en el paso 3. los parametros la casilla E9 es "Yes",  la simulacion del usuario guardara los parametros como caso de referencia. 
+   De lo contrario si en el paso 3. la casilla E9 es "No" la simulacion del usuario guardara los parametros como caso de simulacion. 
+
+ 

@@ -1,0 +1,11 @@
+
+
+## folders
+**/1.Data/*
+**/4.Documentation/*
+
+
+## type of files 
+*.dta
+*.zip
+*.docx
