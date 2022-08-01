@@ -5,13 +5,15 @@
 set more off
 clear all
 macro drop _all
+
 //if (upper("`c(username)'")!="WB378870"){
 //	if (upper("`c(username)'")=="WB334916") global path "C:\Users\\`c(username)'\OneDrive - WBG\WB_GF\2.PovLAC\LC7_PY\4.CEQ\3. PySim2016\PySimTool\"
 //	else global path "C:\Users\wb484435\OneDrive - WBG\Maria Gabriela Farfan Betran - 1.3.PEB\Maria Gabriela Farfan Betran - LC7_PY\4.CEQ\5. PySim 2019\PySimTool\"
 //}
-//else{
+//else {
 	//global path "C:\Users\WB378870\Documents\PySimTool\"
-//}
+// }
+
 
 *qui {
 
@@ -19,9 +21,14 @@ if "`c(username)'"=="WB547455"  {
 	global path "C:\Users\wb547455\WBG\Luis Bernardo Recalde Ramirez - 01 - PySimTool\PySimTool_2019"
 } 
 
+ else if   "`c(username)'"=="WB419055"  {
+	global path "C:\Users\WB419055\OneDrive - WBG\01 - PySimTool\PySimTool_2019"
+} 
 else {
 	global path "C:\Users\recal\Desktop\PySimTool"
 }
+
+
 
 *===============================================================================
 //------------------------------------------------------------------------------
@@ -50,11 +57,16 @@ foreach f of local files{
 	qui:cap run "$theado\\`f'"
 }
 
+foreach adof in apoverty {
+cap ssc install `adof'
+
+}
+
+ 
 *===============================================================================
 // 0. Pull Macros
 *===============================================================================
 run "$thedo\0 - pullmacros.do"
-
 
 *===============================================================================
 // 0.1 Top Incomes...
@@ -74,7 +86,7 @@ if ($simyear>2019 ){ // Income adjust - only if different from 2016
 }
 
 *===============================================================================
-// 2. SSC
+// 2. SSC: social security contributions
 *===============================================================================
 run "$thedo\2 - SSC.do"
 
@@ -82,15 +94,15 @@ run "$thedo\2 - SSC.do"
 *===============================================================================
 // 3. IVA and Pre-Tax Incomes
 *===============================================================================
-if ($ded_after==0) run "$thedo\3.1 - IVA and pretax incomes.do"
-else 			   run "$thedo\3.2 - IVA and pretax incomes new system.do"
+if 		($ded_after==0) run "$thedo\3.1 - IVA and pretax incomes.do"
+else 	run "$thedo\3.2 - IVA and pretax incomes new system.do"
 
 *===============================================================================
 // 4. Tax deductions
 *===============================================================================
 include "$thedo\4 - Tax deductions.do"
 if ($deductmod2!=4) run "$thedo\4.1 - adjust consumption deductions.do" // Adjusting expenditure deduction, only if requested in the tool
-if ($deductmod!=4) run "$thedo\4.2 - investment deductions.do" // Adjust deduction amounts, add the investment deduction -- only if requested in the tool
+if ($deductmod!=4) 	run "$thedo\4.2 - investment deductions.do" // Adjust deduction amounts, add the investment deduction -- only if requested in the tool
 
 *===============================================================================
 // 5. Applying the deductions - Multiple branches
@@ -126,6 +138,10 @@ else{ //Proposed
 *===============================================================================
 // 7. Social Transfers 
 *===============================================================================
+
+
+dsdasdadasda
+
 
 run "$thedo\social_transfers\becas_media.do"
 

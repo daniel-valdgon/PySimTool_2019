@@ -1,6 +1,6 @@
 clear 
 set more off
-dsad
+
 
 *===============================================================================
 //Pull excel parameters
@@ -33,7 +33,7 @@ if (`_addtop'==1){
 levelsof deductmod, local(_dedmod)
 global deductmod `_dedmod'
 
-if (`nonprog'==1){
+if (`nonprog'==1) {
 	levelsof year, local(_simyear)
 	global simyear `_simyear'
 	levelsof bracket, local(_bracket)
@@ -42,7 +42,7 @@ if (`nonprog'==1){
 	levelsof ded_after, local(_ded_after) clean
 	global ded_after `_ded_after'
 	
-	foreach x of local _bracket{
+	foreach x of local _bracket {
 		levelsof min_threshold if bracket==`x', local(_min_t_`x') clean
 			global min_t_`x' = `_min_t_`x''
 		levelsof max_threshold if bracket==`x', local(_max_t_`x') clean
@@ -126,15 +126,21 @@ import excel using "$xls_pry", sheet(gdp) first clear
 levelsof year if !missing(growthYOY), local(_myY)
 levelsof passthru, local(_pthru)
 
+dis " `_myY' "
 local _myY: list sort _myY
+dis " `_myY' "
+
+
 local gy = 1
 
-foreach x of local _myY{
+*This are cumulative growth rates from 2016
+foreach x of local _myY {
 	levelsof growthYOY if year==`x', local(_gy)
 	local gy = (1+`_gy'*`_pthru')*`gy'
 	local _adj`x' = `gy'
 	global adj`x' = `gy'
 }
+
 
 //SSC
 import excel using "$xls_pry", sheet(ssc) first clear

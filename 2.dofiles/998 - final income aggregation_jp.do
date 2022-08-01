@@ -126,7 +126,11 @@ gen irpc=0
 
    egen double dis_inc= rowtotal( net_mkt_income `transfers' monto_becmed monto_becsup monto_transesp monto_transutil monto_pyty1_pc monto_pyty2_pc monto_nangareko_pc)
 
+dsadas check per-capita vs no-percapita values 
+
    dis("`transfer'")
+
+
 
 	//rename some important incomes
 	rename e01ide tekopora_inc 

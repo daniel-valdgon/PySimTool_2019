@@ -41,7 +41,9 @@ local qfood_altoparaguay= alimen[17,1]
 
 *** Target
 
-gen double edu_food=((ed11f1 == 1 | ed11f1a==1| ed11g1 == 1 | ed11g1a==1) & (ed08 == 1 | ed08 == 2 | ed08 == 6) & (ed09 == 1|ed09 == 3))   // recibe alimentacion y esta en colegio publico o privado subsidiado
+gen double edu_food=((ed11f1 == 1 | ed11f1a==1| ed11g1 == 1 | ed11g1a==1) ///
+					& (ed08 == 1 | ed08 == 2 | ed08 == 6) ///
+					& (ed09 == 1|ed09 == 3)) // recibe alimentacion y esta en colegio publico o privado subsidiado
 
 * Imputar transferencias en especies por concepto de alimentos
 gen double monto_transesp=0 

@@ -1,7 +1,9 @@
-
+##files to ignore
 
 ## folders
 **/1.Data/*
+**/2.dofiles/_old_backups*
+**/2.dofiles/1.adofiles/Equity_Policy_Lab/* 
 **/4.Documentation/*
 
 
