@@ -26,7 +26,7 @@ capture drop monto_sub_ande1
 gen        monto_sub_ande1=gasto_electricidad*0.5 if bene_ande==1
 //gen        monto_sub_ande1=gasto_electricidad*0 if bene_ande==1
 replace monto_sub_ande1=gasto_electricidad-gasto_electricidad if bene_ande==0
-table     decilipcm bene_ande [w=fex] , c( mean monto_sub_ande1 sum monto_sub_ande1 ) row col  
+*table     decilipcm bene_ande [w=fex] , c( mean monto_sub_ande1 sum monto_sub_ande1 ) row col  
 
 * Numero de hogares por decil 
 capture drop decilipcmh
@@ -35,7 +35,7 @@ xtile       decilipcmh=ipcm if jefe==1 [w=fex], nq(10)
 *shares 
 capture drop sh_monto
 gen sh_monto=monto_sub_ande1/gasto_electricidad
-table     decilipcmh bene_ande [w=fex] , c( mean monto_sub_ande1 freq mean sh_monto mean gasto_electricidad)
+*table     decilipcmh bene_ande [w=fex] , c( mean monto_sub_ande1 freq mean sh_monto mean gasto_electricidad)
 tabstat sh_monto [w=fex ], by(decilipcmh)
 
 preserve

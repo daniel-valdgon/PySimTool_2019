@@ -67,7 +67,10 @@ replace selector=0  if selector==.
 
 gen monto_becmed= (`beca_edmedia1' + `beca_edmedia2')/12    if selector==1
 
+noi dis "`beca_edmedia1' , `beca_edmedia2' `qbeca_edmedia1'  `qbeca_edmedia2' "
+
 drop selector potential selector_w potencial 
+
 
 
 

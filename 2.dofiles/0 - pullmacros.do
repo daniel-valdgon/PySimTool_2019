@@ -8,9 +8,9 @@ set more off
 
 //Tax schedule
 import excel using "$xls_pry", sheet(nonprog_tax) first clear
-levelsof dothis, local(nonprog)
-global nonprog `nonprog'
-global dothis = `=dothis[1]'
+levelsof dothis, local(nonprog) 
+global nonprog `nonprog' 	 	// `nonprog'= 1== new system 0= old system 
+global dothis = `=dothis[1]' 	// `nonprog'= 1== new system 0= old system 
 levelsof VAT, local(_vat)
 global VAT `_vat'
 levelsof salud, local(_salud)

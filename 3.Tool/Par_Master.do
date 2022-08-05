@@ -63,6 +63,8 @@ cap ssc install `adof'
 }
 
  
+ 
+ 
 *===============================================================================
 // 0. Pull Macros
 *===============================================================================
@@ -71,12 +73,16 @@ run "$thedo\0 - pullmacros.do"
 *===============================================================================
 // 0.1 Top Incomes...
 *===============================================================================
+
 if ($addtop==1) include "$thedo\01 - topincs.do"
+
 
 *===============================================================================
 // 1. Call data
 *===============================================================================
 include "$thedo\1 - Datacall.do"
+
+
 
 if ($simyear>2019 ){ // Income adjust - only if different from 2016
 	run "$thedo\1.1 - income adjust.do"
@@ -84,6 +90,8 @@ if ($simyear>2019 ){ // Income adjust - only if different from 2016
 		run "$thedo\1.2 - income adjust-admin.do"
 	}	
 }
+
+
 
 *===============================================================================
 // 2. SSC: social security contributions
@@ -97,12 +105,17 @@ run "$thedo\2 - SSC.do"
 if 		($ded_after==0) run "$thedo\3.1 - IVA and pretax incomes.do"
 else 	run "$thedo\3.2 - IVA and pretax incomes new system.do"
 
+
+
 *===============================================================================
 // 4. Tax deductions
 *===============================================================================
 include "$thedo\4 - Tax deductions.do"
 if ($deductmod2!=4) run "$thedo\4.1 - adjust consumption deductions.do" // Adjusting expenditure deduction, only if requested in the tool
 if ($deductmod!=4) 	run "$thedo\4.2 - investment deductions.do" // Adjust deduction amounts, add the investment deduction -- only if requested in the tool
+
+
+
 
 *===============================================================================
 // 5. Applying the deductions - Multiple branches
@@ -133,14 +146,9 @@ else{ //Proposed
 }
 
 
-
-
 *===============================================================================
 // 7. Social Transfers 
 *===============================================================================
-
-
-dsdasdadasda
 
 
 run "$thedo\social_transfers\becas_media.do"
@@ -156,16 +164,23 @@ run "$thedo\social_transfers\nangareko_pytyvo.do"
 run "$thedo\social_transfers\tekopora_adulto.do"
 
 
+
 *===============================================================================
 // 7. Net income of IRP
 *===============================================================================
 if ($ded_after==0) { //Current 
  include "$thedo\7.1 - net income of IRP.do" 
+ 
+
+ 
  }
 else { //Proposed
  include "$thedo\7.2 - net income of IRP.do" 
  
 * include "$thedo\7.3 - gini estimates.do"
+
+
+
 }              
 
 tempfile part_I
@@ -183,6 +198,9 @@ save `part_I'
 include "$thedo\IVA_indirects.do"
 
 
+
+
+
 *1. Indirect effects fuel shock 
 
 include "$thedo\fuel_indirects.do"
@@ -193,12 +211,18 @@ include "$thedo\fuel_indirects.do"
 
 include "$thedo\IVA_direct.do"
 
+
+
+
 **************************
 * Imputacion 
 ************************** 
 
 
+
+
 use  `part_I'   , clear 
+ 
  
 rename imputed_vat_v1 hhid 
  
@@ -209,6 +233,10 @@ keep if _merge==3
 drop _merge
  
 drop hhid
+
+
+
+
 
 
 
@@ -251,6 +279,7 @@ save       `indiv_level_sim'
 
 
 
+
 *===============================================================================
 // 11. Costpush
 *===============================================================================
@@ -274,12 +303,29 @@ include "$thedo\997 - subsidio ande 2021.do"
 // 13. Final income aggregation
 *===============================================================================
 
+
 include "$thedo\998 - final income aggregation_jp.do"
+
+
 
 *===============================================================================
 // 14. Process outputs
 *===============================================================================
 include "$thedo\999 - proc simulation.do"
+
+
+
+
+*sort famunit l02, stable
+*sort famunit , stable 
+*sort sector
+*sort  upm nvivi nhoga l02
+*sort famunit , stable
+sort concat
+save "$data_pry/1_datacall_temp_moving.dta", replace
+
+dsadsadas22222
+
 
 *===============================================================================
 // Launch Excel

@@ -34,7 +34,7 @@ local _vat $VAT
 	//Get max income earners in HH
 	
 	*bysort famunit -t_lab_inc: gen topinc = _n
-	gsort famunit -t_lab_inc
+	gsort famunit -t_lab_inc l02 // withouth l02 the replicatin was not exact because of same people earning same labor income
 	by famunit : gen topinc = _n 
 	replace topinc=. if t_lab_inc==0|t_lab_inc==.
 	levelsof topinc, local(_mytopincs)

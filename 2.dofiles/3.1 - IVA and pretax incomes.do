@@ -67,6 +67,7 @@ local _all_incomes mis_ing labor_incs pension_inc other_mkt_incs private_transfe
 
 #delimit cr 
 
+
 *===============================================================================
 // IVA deductions...
 *===============================================================================
@@ -138,4 +139,5 @@ local _all_incomes mis_ing labor_incs pension_inc other_mkt_incs private_transfe
 	egen transfer_inc = rsum(`transfers')
 		lab var transfer_inc "Income from transfers"
 	
-	
+
+

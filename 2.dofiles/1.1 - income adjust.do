@@ -80,7 +80,3 @@ local _all_incomes mis_ing labor_incs pension_inc other_mkt_incs private_transfe
 			replace `y' = `y'*`_adj`_simyear''
 		}	
 	}
-
-	
-	
-		

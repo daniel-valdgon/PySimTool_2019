@@ -12,19 +12,17 @@ local _addtop = $addtop
 *===============================================================================
 use "$indivdta", clear
 
-
-*if (`_addtop'==1) append using "$data_pry/topincs@5.dta", gen(mysource)
-
 if (`_addtop'==1) append using `topincs_5', gen(mysource)
-
 
 egen linpobex_ =max(linpobex), by(area)
 egen linpobto_ =max(linpobto), by(area)
 drop linpobex linpobto
 
+
 merge m:1 dptorep dpto_decile using "$data_pry\shrgasto_decildpto.dta", keepusing(med_prop_gasto_formal med_prop_gasto_trabajo)
-		drop if _m==2
-		drop _m
+drop if _m==2
+drop _m
+
 				
 drop  p04 p04a p04b p05c p05p p05m p08d p08m p08a p09 p10a ///
  p11a p12 a01 a01a a02 a03 a04 a04a a05 a07 a08 a10 a11a a11m ///
@@ -48,6 +46,6 @@ mayores60_hh men_teredad_h ips contpri contsec contpri2 contsec2 salud_count ///
 ing_especie1 irpc5220b cod_ocuirp2 sociedad2 ///
 irpc5220c cod_ocuirp3 tot_asalariados tot_empleadores_cuent eduuti ///
 
-
-
 merge m:1 famunit using  "$data_pry\egi_eph_link_2019.dta"   , nogen
+
+

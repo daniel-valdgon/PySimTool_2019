@@ -279,11 +279,10 @@ foreach x of local rest{
 		qui:append using ``x''
 }
 
-*save "$data_pry/topincs@5.dta", replace
 
 tempfile topincs_5
-
 save `topincs_5'
+
 
 
 

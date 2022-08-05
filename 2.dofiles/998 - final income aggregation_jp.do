@@ -99,6 +99,7 @@ local _all_incomes mis_ing labor_incs pension_inc other_mkt_incs private_transfe
 
 use `indiv_level_sim'  , clear 
 
+
 // Do files 7.1 & 7.2 have computed net_mkt_inc_irp and taxable_income, now we add all other CEQ incomes
 
 	
@@ -125,8 +126,6 @@ gen irpc=0
 *    egen double dis_inc= rsum( net_mkt_income `transfers' becas_hh transfood_hh transutil_hh )
 
    egen double dis_inc= rowtotal( net_mkt_income `transfers' monto_becmed monto_becsup monto_transesp monto_transutil monto_pyty1_pc monto_pyty2_pc monto_nangareko_pc)
-
-dsadas check per-capita vs no-percapita values 
 
    dis("`transfer'")
 
@@ -190,8 +189,6 @@ rename transporte_sub_hh transporteF
 rename senavitat senavitatF
 
 gen senavitatF_pc= senavitatF/totpers
-
-
 
 
 if ($ded_after==0) & ($simyear== 2019) {
@@ -371,6 +368,8 @@ if ($ded_after==1) & ($simyear == 2019) {
  
 //   Final income: final income includes social spending in education, health, and user's tariffs
 
+
+
    egen double final_inc = rsum(cons_inc edupubpreesc_hh edupubprim_hh edupubsec_hh edupubuni_hh saludpub_hh saludips_hh)
 
 	
@@ -434,12 +433,14 @@ save "$data_pry\new_case.dta", replace
 tempfile indiv_level_sim
 save `indiv_level_sim'
 
+
+
 //Now we collapse to have all income components at the household level
 	
 	drop gross_mkt_inc_pc	
 	groupfunction, first(totpers fex nso_inc linpobto linpobex dpto potencial_grav area dpto p02 p06 rango_ingreso minwage_*) sum(`percap_incs') max(monto_pyty1_pc monto_pyty2_pc monto_nangareko_pc monto_iva_pc  monto_iva_pc monto_isc_pc monto_shock_pc monto_nafta_pc monto_shock_dir_pc monto_shock_indir_pc monto_carne_pc monto_strans_pc monto_sotros_pc monto_fuel_pc monto_diesel_pc) by(famunit)
 	
-	foreach x of local percap_incs{
+	foreach x of local percap_incs {
 		replace `x' = `x'/totpers
 		rename `x' `x'_pc
 	}
@@ -462,6 +463,7 @@ save `indiv_level_sim'
 	//gen recibe_ande_new = (monto_sub_ande_pc_pc>0 & monto_sub_ande_pc_pc!=.)
 	
 	
+
 	
 // generate variables for marginal contribution 	
 	
